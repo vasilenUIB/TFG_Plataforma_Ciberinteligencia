@@ -1,0 +1,20 @@
+services:
+  falco-mitre-connector:
+    build: .
+    container_name: falco-mitre-connector
+    restart: unless-stopped
+    environment:
+      - OPENCTI_URL=http://opencti:8080
+      - OPENCTI_TOKEN=${OPENCTI_ADMIN_TOKEN}
+      - CONNECTOR_ID=falco-mitre-connector
+      - CONNECTOR_NAME=Falco MITRE Enrichment
+      - CONNECTOR_SCOPE=Case-Incident
+      - CONNECTOR_TYPE=INTERNAL_ENRICHMENT
+      - CONNECTOR_AUTO=false
+      - CONNECTOR_LOG_LEVEL=info
+    networks:
+      - soc-network
+
+networks:
+  soc-network:
+    external: true
